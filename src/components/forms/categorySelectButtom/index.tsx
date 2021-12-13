@@ -7,13 +7,13 @@ import {
     Icon
 } from './style';
 
-interface Props {
+interface Props extends TouchableOpacityProps{
     title:string
 }
 
-export function CategorySelect({title}: Props) {
+export function CategorySelectButtom({title,...rest}: Props) {
     return(
-        <Container>
+        <Container {...rest}>
             <Category>{title}</Category>
             <Icon name="chevron-down" />
         </Container>
