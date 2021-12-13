@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text } from 'react-native'
+import { TransactionCard } from '../../components/TransactionCard';
 import { Card } from './../../components/card/index';
-
 
 import {
     Container,
@@ -13,10 +12,48 @@ import {
     UserName,
     UserContainer,
     Icon,
-    Cards
+    Cards,
+    Transactions,
+    Title,
+    TransactionList
 } from './style';
 
 export function Dashboard() {
+    const data = [{
+        id: '1',
+        title: "Desenvolvimento de site",
+        amount: "R$ 12.000,50",
+        category: {
+            name: 'Vendas',
+            icon: 'dollar-sign',
+        },
+        date: '01/01/2022',
+        type: 'positive'
+    },
+    {
+        id: '2',
+        title: "Desenvolvimento de site",
+        amount: "R$ 12.000,50",
+        category: {
+            name: 'Alimentação',
+            icon: 'coffee',
+        },
+        date: '01/01/2022',
+        type: 'negative'
+    },
+    {
+        id: '3',
+        title: "Aluguel do apartamento",
+        amount: "R$ 12.000,50",
+        category: {
+            name: 'Casa',
+            icon: 'shopping-bag',
+        },
+        date: '01/01/2022',
+        type: 'positive'
+    }
+    ]
+
     return (
         <Container>
 
@@ -58,6 +95,21 @@ export function Dashboard() {
                 />
 
             </Cards>
+
+            <Transactions>
+                <Title>Listagem</Title>
+
+                <TransactionList
+                    data={data}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) =>
+                        <TransactionCard
+                            data={item}
+                        />
+                    }
+                />
+
+            </Transactions>
         </Container>
     )
 }
