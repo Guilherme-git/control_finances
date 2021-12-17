@@ -15,7 +15,7 @@ interface TextProps {
     isActive: boolean;
 }
 
-export const Container = styled.TouchableOpacity<ContainerProps>`
+export const Container = styled.TouchableOpacity.attrs({activeOpacity: 0.7})<ContainerProps>`
     width: 48%;
     flex-direction: row;
     align-items: center;

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { TransactionCard } from '../../components/TransactionCard';
 import { Card } from './../../components/card/index';
+import {useFocusEffect} from '@react-navigation/native';
 
 import {
     Container,
@@ -15,44 +16,79 @@ import {
     Cards,
     Transactions,
     Title,
-    TransactionList
+    TransactionList,
+    LogoutButton
 } from './style';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function Dashboard() {
-    const data = [{
-        id: '1',
-        title: "Desenvolvimento de site",
-        amount: "R$ 12.000,50",
-        category: {
-            name: 'Vendas',
-            icon: 'dollar-sign',
-        },
-        date: '01/01/2022',
-        type: 'positive'
-    },
-    {
-        id: '2',
-        title: "Desenvolvimento de site",
-        amount: "R$ 12.000,50",
-        category: {
-            name: 'Alimentação',
-            icon: 'coffee',
-        },
-        date: '01/01/2022',
-        type: 'negative'
-    },
-    {
-        id: '3',
-        title: "Aluguel do apartamento",
-        amount: "R$ 12.000,50",
-        category: {
-            name: 'Casa',
-            icon: 'shopping-bag',
-        },
-        date: '01/01/2022',
-        type: 'positive'
-    }
-    ]
+    const [data, setData] = useState([])
+
+    useFocusEffect(useCallback(() => {
+        const loading = async () => {
+            const response = await AsyncStorage.getItem('@controlfinances:transactions')
+            const transactions = response ? JSON.parse(response) : [];
+
+            const transactionsFormatted = transactions.map((item) => {
+
+                const amount = Number(item.amount).toLocaleString('pt-BR', {
+                    style: "currency",
+                    currency: 'BRL'
+                });
+
+                const date = Intl.DateTimeFormat('pt-BR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: '2-digit'
+                }).format(new Date(item.date))
+
+                return {
+                    id: item.id,
+                    name: item.name,
+                    amount,
+                    type: item.transactionType,
+                    category: item.category,
+                    date
+                }
+            })
+            setData(transactionsFormatted)
+        }
+        loading();
+    }, []));
+
+    useEffect(() => {
+        const loading = async () => {
+            const response = await AsyncStorage.getItem('@controlfinances:transactions')
+            const transactions = response ? JSON.parse(response) : [];
+
+            const transactionsFormatted = transactions.map((item) => {
+
+                const amount = Number(item.amount).toLocaleString('pt-BR', {
+                    style: "currency",
+                    currency: 'BRL'
+                });
+
+                const date = Intl.DateTimeFormat('pt-BR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: '2-digit'
+                }).format(new Date(item.date))
+
+                return {
+                    id: item.id,
+                    name: item.name,
+                    amount,
+                    type: item.transactionType,
+                    category: item.category,
+                    date
+                }
+            })
+            setData(transactionsFormatted)
+
+
+        }
+        loading();
+    }, []);
 
     return (
         <Container>
@@ -68,7 +104,9 @@ export function Dashboard() {
                         </User>
                     </UserInfo>
 
-                    <Icon name="power" />
+                    <LogoutButton onPress={() => { }}>
+                        <Icon name="power" />
+                    </LogoutButton>
                 </UserContainer>
             </Header>
 

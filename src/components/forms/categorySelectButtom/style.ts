@@ -2,8 +2,8 @@ import styled,{css} from 'styled-components/native';
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import {Feather} from '@expo/vector-icons';
 
-export const Container = styled.TouchableOpacity`
-     background-color: ${({theme}) => theme.colors.shape};
+export const Container = styled.TouchableOpacity.attrs({activeOpacity: 0.5})`
+     background-color: ${({theme}) => theme.colors.shape}
      flex-direction: row;
      justify-content: space-between;
      align-items: center;
