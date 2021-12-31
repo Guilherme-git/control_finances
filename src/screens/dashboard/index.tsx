@@ -114,8 +114,7 @@ export function Dashboard() {
                     amount: total.toLocaleString('pt-BR', {
                         style: "currency",
                         currency: 'BRL',
-                    }),
-                    lastTransactionDate: ''
+                    })
                 }
             })
             setData(transactionsFormatted)
