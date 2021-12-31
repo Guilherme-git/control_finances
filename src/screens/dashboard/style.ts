@@ -92,5 +92,10 @@ export const TransactionList = styled.FlatList.attrs({
         paddingBottom: 10
     }
 })`
+`;
 
+export const Loading = styled.View`
+   flex:1;
+   justify-content: center;
+   align-items:center
 `;
