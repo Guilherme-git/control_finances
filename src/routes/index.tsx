@@ -8,12 +8,14 @@ const { Navigator, Screen } = createBottomTabNavigator();
 
 import { Dashboard } from "../screens/dashboard";
 import { Register } from "../screens/register";
+import { Resume } from "../screens/resume";
 
 export function Routes() {
     const theme = useTheme();
 
     return (
-        <Navigator screenOptions={{
+        <Navigator initialRouteName="Resumo"
+        screenOptions={{
             headerShown: false,
             tabBarActiveTintColor: theme.colors.secundary,
             tabBarInactiveTintColor: theme.colors.text,
@@ -41,7 +43,7 @@ export function Routes() {
                 options={{
                     tabBarIcon: (({ size, color }) => <MaterialIcons name="pie-chart" size={size} color={color} />)
                 }}
-                name="Resumo" component={Dashboard} />
+                name="Resumo" component={Resume} />
         </Navigator>
     );
 }
