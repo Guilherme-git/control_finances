@@ -27,11 +27,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 interface HighlightData {
     entries: {
         amount: string,
-        lastTransactionDate: string
     },
     expensive: {
         amount: string,
-        lastTransactionDate: string
     },
     total: {
         amount: string
@@ -84,31 +82,18 @@ export function Dashboard() {
 
             const total = entriesTotal - expensiveTotal
 
-            const lastTransactionsEntries =  new Date(Math.max.apply(Math,
-                transactions.filter(t => t.transactionType === 'up').map(t => new Date(t.date).getTime()))
-            )
-            const lastTransactionsEntriesFormatted = `${lastTransactionsEntries.getDate()} de ${lastTransactionsEntries.toLocaleString('pt-BR', {month: 'long'})}`
-
-
-            const lastTransactionsExpensives =  new Date(Math.max.apply(Math,
-                transactions.filter(t => t.transactionType === 'down').map(t => new Date(t.date).getTime()))
-            )
-            const lastTransactionsExpensivesFormatted = `${lastTransactionsExpensives.getDate()} de ${lastTransactionsExpensives.toLocaleString('pt-BR', {month: 'long'})}`
-
             setHighlightData({
                 entries: {
                     amount: entriesTotal.toLocaleString('pt-BR', {
                         style: "currency",
                         currency: 'BRL'
-                    }),
-                    lastTransactionDate: `Última entrada dia ${lastTransactionsEntriesFormatted}` 
+                    })
                 },
                 expensive: {
                     amount: expensiveTotal.toLocaleString('pt-BR', {
                         style: "currency",
                         currency: 'BRL'
-                    }),
-                    lastTransactionDate: `Útima saída dia ${lastTransactionsExpensivesFormatted}`
+                    })
                 },
                 total: {
                     amount: total.toLocaleString('pt-BR', {
@@ -163,31 +148,18 @@ export function Dashboard() {
 
             const total = entriesTotal - expensiveTotal
 
-            const lastTransactionsEntries =  new Date(Math.max.apply(Math,
-                transactions.filter(t => t.transactionType === 'up').map(t => new Date(t.date).getTime()))
-            )
-            const lastTransactionsEntriesFormatted = `${lastTransactionsEntries.getDate()} de ${lastTransactionsEntries.toLocaleString('pt-BR', {month: 'long'})}`
-
-
-            const lastTransactionsExpensives =  new Date(Math.max.apply(Math,
-                transactions.filter(t => t.transactionType === 'down').map(t => new Date(t.date).getTime()))
-            )
-            const lastTransactionsExpensivesFormatted = `${lastTransactionsExpensives.getDate()} de ${lastTransactionsExpensives.toLocaleString('pt-BR', {month: 'long'})}`
-
             setHighlightData({
                 entries: {
                     amount: entriesTotal.toLocaleString('pt-BR', {
                         style: "currency",
                         currency: 'BRL'
-                    }),
-                    lastTransactionDate: `Última entrada dia ${lastTransactionsEntriesFormatted}` 
+                    })
                 },
                 expensive: {
                     amount: expensiveTotal.toLocaleString('pt-BR', {
                         style: "currency",
                         currency: 'BRL'
-                    }),
-                    lastTransactionDate: `Útima saída dia ${lastTransactionsExpensivesFormatted}`
+                    })
                 },
                 total: {
                     amount: total.toLocaleString('pt-BR', {
@@ -236,21 +208,18 @@ export function Dashboard() {
                             <Card
                                 title="Entradas"
                                 amount={highlightData.entries.amount}
-                                lastTransaction={highlightData.entries.lastTransactionDate}
                                 type="up"
                             />
 
                             <Card
                                 title="Saídas"
                                 amount={highlightData.expensive.amount}
-                                lastTransaction={highlightData.expensive.lastTransactionDate}
                                 type="down"
                             />
 
                             <Card
                                 title="Total"
                                 amount={highlightData.total.amount}
-                                lastTransaction=""
                                 type="total"
                             />
 

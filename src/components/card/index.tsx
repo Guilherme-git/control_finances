@@ -7,7 +7,6 @@ import {
 interface Props {
     title: String;
     amount: String;
-    lastTransaction: String;
     type: 'up' | 'down' | 'total'
 }
 
@@ -17,7 +16,7 @@ const icon = {
     total: 'dollar-sign'
 }
 
-export function Card({title, amount, lastTransaction, type} : Props) {
+export function Card({title, amount, type} : Props) {
     return (
         <Container type={type}>
 
@@ -28,7 +27,6 @@ export function Card({title, amount, lastTransaction, type} : Props) {
 
             <Footer>
                 <Amount type={type}>{amount}</Amount>
-                <LastTransaction type={type} >{lastTransaction}</LastTransaction>
             </Footer>
 
         </Container>
